@@ -17,6 +17,7 @@ headerCityButton.addEventListener('click', () => {
 //Блокировка скролла
 const disableScroll = () => {
   const widthScroll = window.innerWidth - document.body.offsetWidth;
+  document.querySelector('header').style.width = '100vw';
   document.body.dbScrollY = window.scrollY;
   document.body.style.cssText = `
     position: fixed;
@@ -30,6 +31,7 @@ const disableScroll = () => {
 };
 
 const enableScroll = () => {
+  document.querySelector('header').style.width = '';
   document.body.style.cssText = '';
   window.scroll({
     top: document.body.dbScrollY,
@@ -57,4 +59,8 @@ cartOverlay.addEventListener('click', event => {
   if (target.matches('.cart__btn-close') || target.matches('.cart-overlay')) {
     cartModalClose();
   }
+});
+
+document.addEventListener('keydown', event => {
+  if (event.code === 'Escape') cartModalClose();
 });
