@@ -19,6 +19,8 @@ headerCityButton.addEventListener('click', () => {
 
 //Блокировка скролла
 const disableScroll = () => {
+  if (document.disableScroll) return;
+  document.disableScroll = true;
   const widthScroll = window.innerWidth - document.body.offsetWidth;
   document.querySelector('header').style.width = '100vw';
   document.body.dbScrollY = window.scrollY;
@@ -34,8 +36,9 @@ const disableScroll = () => {
 };
 
 const enableScroll = () => {
-  document.querySelector('header').style.width = '';
-  document.body.style.cssText = '';
+  document.disableScroll = false;
+  document.querySelector('header').removeAttribute('style');
+  document.body.removeAttribute('style');
   window.scroll({
     top: document.body.dbScrollY,
   });
@@ -105,7 +108,7 @@ try {
     preview,
     cost,
     brand,
-    name,
+    name: title,
     sizes,
   }) => {
     const li = document.createElement('li');
@@ -118,7 +121,7 @@ try {
             </a>
             <div class="good__description">
               <p class="good__price">${cost} &#8381;</p>
-              <h3 class="good__title">${brand} <span class="good__title__grey">/ ${name}</span></h3>
+              <h3 class="good__title">${brand} <span class="good__title__grey">/ ${title}</span></h3>
               ${sizes ?
                   `<p class="good__sizes">Размеры (RUS): <span class="good__sizes-list">${sizes.join(' ')}</span></p>` :
                 ''}
