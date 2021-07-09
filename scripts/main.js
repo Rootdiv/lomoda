@@ -26,7 +26,7 @@ const setLocalStorage = data => (localStorage.setItem('lomoda-cart', JSON.string
 
 const renderCart = () => {
   let totalPrice = 0;
-  cartListGoods.textContent = '';
+  cartListGoods.innerHTML = '<tr></tr>';
   const cartItems = getLocalStorage();
   cartItems.forEach((item, i) => {
     const tr = document.createElement('tr');
