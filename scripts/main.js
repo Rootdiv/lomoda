@@ -24,6 +24,19 @@ headerCityButton.addEventListener('click', () => {
 const getLocalStorage = () => JSON.parse(localStorage.getItem('lomoda-cart')) || [];
 const setLocalStorage = data => (localStorage.setItem('lomoda-cart', JSON.stringify(data)));
 
+const declOfNum = (n, titles) => n + ' ' + titles[n % 10 === 1 && n % 100 !== 11 ?
+  0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
+
+const updateCountGoodsCart = () => {
+  if (getLocalStorage().length) {
+    subheaderCart.textContent = declOfNum(getLocalStorage().length, [' товар', ' товара', ' товаров']);
+  } else {
+    subheaderCart.textContent = 'Корзина';
+  }
+};
+
+updateCountGoodsCart();
+
 const renderCart = () => {
   let totalPrice = 0;
   cartListGoods.innerHTML = '<tr></tr>';
@@ -48,6 +61,7 @@ const deleteItemCart = id => {
   const cartItems = getLocalStorage();
   const newCartItems = cartItems.filter(item => item.id !== id);
   setLocalStorage(newCartItems);
+  updateCountGoodsCart();
 };
 
 //Блокировка скролла
@@ -260,6 +274,7 @@ try {
     const addCart = () => {
       cardGoodBuy.classList.add('delete');
       cardGoodBuy.textContent = 'Удалить из корзины';
+      updateCountGoodsCart();
     };
 
     if (getLocalStorage().some(item => item.id === id)) addCart();
