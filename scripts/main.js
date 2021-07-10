@@ -69,7 +69,6 @@ const disableScroll = () => {
   if (document.disableScroll) return;
   document.disableScroll = true;
   const widthScroll = window.innerWidth - document.body.offsetWidth;
-  document.querySelector('header').style.width = '100vw';
   document.body.dbScrollY = window.scrollY;
   document.body.style.cssText = `
     position: fixed;
@@ -84,7 +83,6 @@ const disableScroll = () => {
 
 const enableScroll = () => {
   document.disableScroll = false;
-  document.querySelector('header').removeAttribute('style');
   document.body.removeAttribute('style');
   window.scroll({
     top: document.body.dbScrollY,

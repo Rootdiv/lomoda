@@ -1,6 +1,7 @@
 .header {
     background-color: #000;
     color: #fff;
+    width: 100vw;
     &__wrapper {
         display: flex;
         justify-content: space-between;
@@ -50,11 +51,12 @@
         align-items: center;
         background-color: #f93c00;
         max-height: 100%;
+        width: 155px;
         &-img {
             max-height: 100%;
         }
         *:not(:last-child) {
             margin-right: 5px;
         }
-        
+
 }}
